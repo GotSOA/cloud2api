@@ -1,338 +1,12 @@
 #%RAML 0.8
-title: cloud 2.0
+title: cloud 2.0 API
+baseUri: http://localhost:8081/api/v0
 version: v0.1
-baseUri: http://localhost:8081/api
-schemas: 
-  - invoiceDetail : |
-     {
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "id": "http://jsonschema.net",
-        "type": "object",
-          "properties": {
-            "invoice": {
-              "id": "http://jsonschema.net/invoice",
-              "type": "object",
-              "properties": {
-                "accountNumber": {
-                  "id": "http://jsonschema.net/invoice/accountNumber",
-                  "type": "string"
-                },
-                "invoiceNumber": {
-                  "id": "http://jsonschema.net/invoice/invoiceNumber",
-                  "type": "string"
-                },
-                "invoiceSummaryType": {
-                  "id": "http://jsonschema.net/invoice/invoiceSummaryType",
-                  "type": "object",
-                  "properties": {
-                    "totalCharges": {
-                      "id": "http://jsonschema.net/invoice/invoiceSummaryType/totalCharges",
-                      "type": "number"
-                    },
-                    "totalTaxes": {
-                      "id": "http://jsonschema.net/invoice/invoiceSummaryType/totalTaxes",
-                      "type": "number"
-                    },
-                    "totalAdjustments": {
-                      "id": "http://jsonschema.net/invoice/invoiceSummaryType/totalAdjustments",
-                      "type": "number"
-                    },
-                    "invoiceTotal": {
-                      "id": "http://jsonschema.net/invoice/invoiceSummaryType/invoiceTotal",
-                      "type": "number"
-                    }
-                  }
-                },
-                "taxes": {
-                  "id": "http://jsonschema.net/invoice/taxes",
-                  "type": "object",
-                  "properties": {
-                    "dataCenterTaxes": {
-                      "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes",
-                      "type": "array",
-                      "items": {
-                        "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0",
-                        "type": "object",
-                        "properties": {
-                          "totalTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/totalTaxes",
-                            "type": "number"
-                          },
-                          "ramTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/ramTaxes",
-                            "type": "number"
-                          },
-                          "dcpuTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/dcpuTaxes",
-                            "type": "number"
-                          },
-                          "bandwidthTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/bandwidthTaxes",
-                            "type": "number"
-                          },
-                          "primaryStorageTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/primaryStorageTaxes",
-                            "type": "number"
-                          },
-                          "secondaryStorageTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/secondaryStorageTaxes",
-                            "type": "number"
-                          },
-                          "softwareTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/softwareTaxes",
-                            "type": "number"
-                          },
-                          "ipAddressTaxes": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/ipAddressTaxes",
-                            "type": "number"
-                          },
-                          "datacenterName": {
-                            "id": "http://jsonschema.net/invoice/taxes/dataCenterTaxes/0/datacenterName",
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "adjustments": {
-                  "id": "http://jsonschema.net/invoice/adjustments",
-                  "type": "object",
-                  "properties": {
-                    "adjustmentType": {
-                      "id": "http://jsonschema.net/invoice/adjustments/adjustmentType",
-                      "type": "array",
-                      "items": {
-                        "id": "http://jsonschema.net/invoice/adjustments/adjustmentType/0",
-                        "type": "object",
-                        "properties": {
-                          "date": {
-                            "id": "http://jsonschema.net/invoice/adjustments/adjustmentType/0/date",
-                            "type": "string"
-                          },
-                          "description": {
-                            "id": "http://jsonschema.net/invoice/adjustments/adjustmentType/0/description",
-                            "type": "string"
-                          },
-                          "ammount": {
-                            "id": "http://jsonschema.net/invoice/adjustments/adjustmentType/0/ammount",
-                            "type": "number"
-                          }
-                        }
-                      }
-                    },
-                    "adjustmentTotal": {
-                      "id": "http://jsonschema.net/invoice/adjustments/adjustmentTotal",
-                      "type": "number"
-                    }
-                  }
-                },
-                "usage": {
-                  "id": "http://jsonschema.net/invoice/usage",
-                  "type": "object",
-                  "properties": {
-                    "workplaceUsageType": {
-                      "id": "http://jsonschema.net/invoice/usage/workplaceUsageType",
-                      "type": "array",
-                      "items": {
-                        "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0",
-                        "type": "object",
-                        "properties": {
-                          "workplaceName": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/workplaceName",
-                            "type": "string"
-                          },
-                          "workplaceId": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/workplaceId",
-                            "type": "string"
-                          },
-                          "totalUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/totalUsage",
-                            "type": "number"
-                          },
-                          "ramUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/ramUsage",
-                            "type": "number"
-                          },
-                          "cpuUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/cpuUsage",
-                            "type": "number"
-                          },
-                          "bandwidthUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/bandwidthUsage",
-                            "type": "number"
-                          },
-                          "primaryStorageUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/primaryStorageUsage",
-                            "type": "number"
-                          },
-                          "secondaryStorageUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/secondaryStorageUsage",
-                            "type": "number"
-                          },
-                          "softwareUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/softwareUsage",
-                            "type": "number"
-                          },
-                          "ipAddressUsage": {
-                            "id": "http://jsonschema.net/invoice/usage/workplaceUsageType/0/ipAddressUsage",
-                            "type": "number"
-                          }
-                        }
-                      }
-                    },
-                    "adjustmentTotal": {
-                      "id": "http://jsonschema.net/invoice/usage/adjustmentTotal",
-                      "type": "number"
-                    }
-                  }
-                },
-                "workplaceUsage": {
-                  "id": "http://jsonschema.net/invoice/workplaceUsage",
-                  "type": "object",
-                  "properties": {
-                    "workplaceName": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/workplaceName",
-                      "type": "string"
-                    },
-                    "workplaceId": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/workplaceId",
-                      "type": "string"
-                    },
-                    "totalUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/totalUsage",
-                      "type": "number"
-                    },
-                    "ramUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/ramUsage",
-                      "type": "number"
-                    },
-                    "cpuUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/cpuUsage",
-                      "type": "number"
-                    },
-                    "bandwidthUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/bandwidthUsage",
-                      "type": "number"
-                    },
-                    "primaryStorageUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/primaryStorageUsage",
-                      "type": "number"
-                    },
-                    "secondaryStorageUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/secondaryStorageUsage",
-                      "type": "number"
-                    },
-                    "softwareUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/softwareUsage",
-                      "type": "number"
-                    },
-                    "ipAddressUsage": {
-                      "id": "http://jsonschema.net/invoice/workplaceUsage/ipAddressUsage",
-                      "type": "number"
-                    }
-                  }
-                }
-              },
-              "required": [
-                "accountNumber",
-                "invoiceNumber",
-                "invoiceSummaryType",
-                "taxes",
-                "adjustments",
-                "usage",
-                "workplaceUsage"
-              ]
-            }
-          },
-          "required": [
-            "invoice"
-          ]
-      }
-  - invoice: |
-      {
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "id": "http://jsonschema.net",
-        "type": "object",
-        "properties": {
-          "invoice": {
-            "id": "http://jsonschema.net/invoice",
-            "type": "array",
-            "items": [
-              {
-                "id": "http://jsonschema.net/invoice/0",
-                "type": "object",
-                "properties": {
-                  "accountNumber": {
-                    "id": "http://jsonschema.net/invoice/0/accountNumber",
-                    "type": "string"
-                  },
-                  "invoiceNumber": {
-                    "id": "http://jsonschema.net/invoice/0/invoiceNumber",
-                    "type": "string"
-                  },
-                  "periodEndDate": {
-                    "id": "http://jsonschema.net/invoice/0/periodEndDate",
-                    "type": "string"
-                  },
-                  "dueDate": {
-                    "id": "http://jsonschema.net/invoice/0/dueDate",
-                    "type": "string"
-                  },
-                  "totalDue": {
-                    "id": "http://jsonschema.net/invoice/0/totalDue",
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "accountNumber",
-                  "invoiceNumber",
-                  "periodEndDate",
-                  "dueDate",
-                  "totalDue"
-                ]
-              },
-              {
-                "id": "http://jsonschema.net/invoice/1",
-                "type": "object",
-                "properties": {
-                  "accountNumber": {
-                    "id": "http://jsonschema.net/invoice/1/accountNumber",
-                    "type": "string"
-                  },
-                  "invoiceNumber": {
-                    "id": "http://jsonschema.net/invoice/1/invoiceNumber",
-                    "type": "string"
-                  },
-                  "periodEndDate": {
-                    "id": "http://jsonschema.net/invoice/1/periodEndDate",
-                    "type": "string"
-                  },
-                  "dueDate": {
-                    "id": "http://jsonschema.net/invoice/1/dueDate",
-                    "type": "string"
-                  },
-                  "totalDue": {
-                    "id": "http://jsonschema.net/invoice/1/totalDue",
-                    "type": "number"
-                  }
-                }
-              }
-            ],
-            "required": [
-              "0",
-              "1"
-            ]
-          }
-        },
-        "required": [
-          "invoice"
-        ]
-      }
 /account:
-  description: Account related information
+  description: Account Information
   /customerAccount:
-    description: Reterives Customer related information
+    description: Retrieve Customer related information
+    # @Suman: Customer or Account?
     get:
       description: Get the customer information
       queryParameters:
@@ -344,61 +18,55 @@ schemas:
        200:
         body:
           application/json:
-            example: |
-              {
-                "account": 
-                  {
-                      "accountNumber": "SFDCID? SID?  someID?",
-                      "accountName": "AcctName123",
-                      "address": "ADDRESS TYPE Not Defined",
-                      "contacts": "Contacts type not defined",
-                      "paymentTerms": "Payment Terms Type not defined"
-                      
-                    }
-                      
-               }     
-/invoice:
-  description: invoice related information
-  /findInvoice:
-    description: Retrieves the list of Invoices for an account whose end date lies within a specified date range.
+            example: !include examples/account-get-example.json
+               
+/invoices:
+  description: Retrieve list of invoices related information for a specific account and a date range
+  get:
+    queryParameters:
+      accountNumber:
+        description: Account Number
+        required: true
+        type: string
+      startDate:  
+        description: Start Date
+        required: true
+        type: date
+      endDate:  
+        description: End Date
+        required: true
+        type: date
+    responses:
+      200:
+        body:
+          application/json:
+            schema: !include schemas/invoice-schema.json
+            example: !include examples/invoices-get-example.json
+              
+  /{invoiceNumber}:
+    displayName: getInvoice
+    description: A specific invoice
     get:
-      queryParameters:
-        accountNumber:
-          description: Account Number
-          required: true
-          type: string
-        startDate:  
-          description: Start Date
-          required: true
-          type: date
-        endDate:  
-          description: end Date
-          required: true
-          type: date
       responses:
         200:
+          description: |
+            Invoice retrieved successfully
           body:
             application/json:
-              schema: invoice
-              example: |
-                {
-                  "invoice" : [
-                    {
-                      "accountNumber":"acctno123",
-                      "invoiceNumber":"invno123",
-                      "periodEndDate":"Jan 27, 2015 10:31:49 AM",
-                      "dueDate":"Feb 27, 2015 10:31:49 AM",
-                      "totalDue":100.0
-                    },
-                    {
-                      "accountNumber":"acctno1234",
-                      "invoiceNumber":"invno1234",
-                      "periodEndDate":"Feb 28, 2015 10:31:49 AM",
-                      "dueDate":"Mar 27, 2015 10:31:49 AM",
-                      "totalDue":5000.0
-                    }
-                      ]
-                }
+              schema: !include schemas/invoice-schema.json
+              example: !include examples/invoiceDetail-get-example.json
+              
+    /invoiceDetail:
+        displayName: getInvoiceDetail
+        description: Retrieves the Invoice Detail (usage, adjustments, etc.)
+        get:
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: !include schemas/invoiceDetail-schema.json
+                  example: !include examples/invoiceDetail-get-example.json
+                              
   /retrieveInvoice:
     description: Retrieves a binary (.pdf) representation of the actual invoice.
     get:
@@ -415,93 +83,7 @@ schemas:
         200:
           body:
              multipart/form-data:
-             
-           
-  /retrieveInvoiceDetail:
-    description: Retrieves the detail (usage, adjustments, etc.) that underlies a specific invoice to support drill-down of invoice data
-    get:
-      queryParameters:
-        accountNumber:
-          description: Account Number
-          required: true
-          type: string
-        invoiceNumber:
-          description: Invoice Number
-          required: true
-          type: string
-      responses:
-        200:
-          body:
-            application/json:
-              schema: invoiceDetail
-              example: |
-                  {
-                    "invoice" : 
-                                        {
-                      "accountNumber": "AcctNo123",
-                      "invoiceNumber": "InvNo123",
-                      "invoiceSummaryType": {
-                        "totalCharges": 1000.0,
-                        "totalTaxes": 60.0,
-                        "totalAdjustments": 10.0,
-                        "invoiceTotal": 1050.0
-                      },
-                      "taxes": {
-                        "dataCenterTaxes": [
-                          {
-                            "totalTaxes": 60.0,
-                            "ramTaxes": 10.0,
-                            "dcpuTaxes": 10.0,
-                            "bandwidthTaxes": 10.0,
-                            "primaryStorageTaxes": 10.0,
-                            "secondaryStorageTaxes": 10.0,
-                            "softwareTaxes": 10.0,
-                            "ipAddressTaxes": 0.0,
-                            "datacenterName": "dataCenterName"
-                          }
-                        ]
-                      },
-                      "adjustments": {
-                        "adjustmentType": [
-                          {
-                            "date": "Feb 27, 2015 11:44:30 AM",
-                            "description": "SomeTypeofAdjustment",
-                            "ammount": 10.0
-                          }
-                        ],
-                        "adjustmentTotal": 10.0
-                      },
-                      "usage": {
-                        "workplaceUsageType": [
-                          {
-                            "workplaceName": "workplacename",
-                            "workplaceId": "workplaceID",
-                            "totalUsage": 70.0,
-                            "ramUsage": 10.0,
-                            "cpuUsage": 10.0,
-                            "bandwidthUsage": 10.0,
-                            "primaryStorageUsage": 10.0,
-                            "secondaryStorageUsage": 10.0,
-                            "softwareUsage": 10.0,
-                            "ipAddressUsage": 10.0
-                          }
-                        ],
-                        "adjustmentTotal": 10.0
-                      },
-                      "workplaceUsage": {
-                        "workplaceName": "workplacename",
-                        "workplaceId": "workplaceID",
-                        "totalUsage": 70.0,
-                        "ramUsage": 10.0,
-                        "cpuUsage": 10.0,
-                        "bandwidthUsage": 10.0,
-                        "primaryStorageUsage": 10.0,
-                        "secondaryStorageUsage": 10.0,
-                        "softwareUsage": 10.0,
-                        "ipAddressUsage": 10.0
-                      }
-                    }
-                  }      
+      
 /product:
     description: Details regarding product
     /templatePrices:
@@ -574,3 +156,14 @@ schemas:
                     }
                   }        
     
+/customers:
+  description: Retrieve list of customers
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: !include schemas/customer-schema.json
+            example: !include examples/customers-get-example.json
+            
+ 

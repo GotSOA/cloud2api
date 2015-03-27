@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:hbase="http://www.mulesoft.org/schema/mule/hbase" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd" version="EE-3.6.0">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/hbase http://www.mulesoft.org/schema/mule/hbase/current/mule-hbase.xsd" version="EE-3.5.2">
+
+	<!-- add this properties as the minimal configuration required for hBase CloudConnector to work
+    <hbase:config name="hbaseTest" doc:name="Hbase">
+        <hbase:properties>
+            <hbase:property key="hbase.zookeeper.quorum">172.16.20.35</hbase:property>
+            <hbase:property key="hbase.zookeeper.property.clientPort">2181</hbase:property>
+        </hbase:properties>
+    </hbase:config>
+	-->
+	
     <apikit:config name="api-config" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router" />
-    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping">
+    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping" doc:name="Mapping Exception Strategy">
         <apikit:mapping statusCode="404">
             <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
@@ -32,27 +43,35 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload" />
         </apikit:mapping>
     </apikit:mapping-exception-strategy>
-    <flow name="api-main">
+    <flow name="api-main" doc:name="api-main">
         <http:inbound-endpoint doc:name="HTTP" exchange-pattern="request-response" host="localhost" path="cloud2api/api" port="9091" />
         <apikit:router config-ref="api-config" doc:name="APIkit Router" />
         <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
     </flow>
-    <flow name="get:/invoice/findInvoice:api-config">
+    <flow name="get:/invoice/findInvoice:api-config" doc:name="get:/invoice/findInvoice:api-config">
         <set-payload value="{&#xA;  &quot;invoice&quot; : [&#xA;    {&#xA;      &quot;accountNumber&quot;:&quot;acctno123&quot;,&#xA;      &quot;invoiceNumber&quot;:&quot;invno123&quot;,&#xA;      &quot;periodEndDate&quot;:&quot;Jan 27, 2015 10:31:49 AM&quot;,&#xA;      &quot;dueDate&quot;:&quot;Feb 27, 2015 10:31:49 AM&quot;,&#xA;      &quot;totalDue&quot;:100.0&#xA;    },&#xA;    {&#xA;      &quot;accountNumber&quot;:&quot;acctno1234&quot;,&#xA;      &quot;invoiceNumber&quot;:&quot;invno1234&quot;,&#xA;      &quot;periodEndDate&quot;:&quot;Feb 28, 2015 10:31:49 AM&quot;,&#xA;      &quot;dueDate&quot;:&quot;Mar 27, 2015 10:31:49 AM&quot;,&#xA;      &quot;totalDue&quot;:5000.0&#xA;    }&#xA;      ]&#xA;}" doc:name="Set Payload" />
     </flow>
-    <flow name="get:/product/offeringPrices:api-config">
+    <flow name="get:/product/offeringPrices:api-config" doc:name="get:/product/offeringPrices:api-config">
         <set-payload value="{&#xA;  {&#xA;    &quot;accountNumber&quot;: &quot;AcctNo123&quot;,&#xA;    &quot;offeringPrice&quot;: [&#xA;      {&#xA;        &quot;offeringID&quot;: &quot;offeringID123&quot;,&#xA;        &quot;unitPrice&quot;: 250.0&#xA;      },&#xA;      {&#xA;        &quot;offeringID&quot;: &quot;offeringID1234&quot;,&#xA;        &quot;unitPrice&quot;: 150.0&#xA;      }&#xA;    ]&#xA;  }&#xA;}" doc:name="Set Payload" />
     </flow>
-    <flow name="get:/invoice/retrieveInvoice:api-config">
+    <flow name="get:/invoice/retrieveInvoice:api-config" doc:name="get:/invoice/retrieveInvoice:api-config">
         <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload" />
     </flow>
-    <flow name="get:/invoice/retrieveInvoiceDetail:api-config">
+    <flow name="get:/invoice/retrieveInvoiceDetail:api-config" doc:name="get:/invoice/retrieveInvoiceDetail:api-config">
         <set-payload value="{&#xA;  &quot;invoice&quot; : &#xA;                      {&#xA;    &quot;accountNumber&quot;: &quot;AcctNo123&quot;,&#xA;    &quot;invoiceNumber&quot;: &quot;InvNo123&quot;,&#xA;    &quot;invoiceSummaryType&quot;: {&#xA;      &quot;totalCharges&quot;: 1000.0,&#xA;      &quot;totalTaxes&quot;: 60.0,&#xA;      &quot;totalAdjustments&quot;: 10.0,&#xA;      &quot;invoiceTotal&quot;: 1050.0&#xA;    },&#xA;    &quot;taxes&quot;: {&#xA;      &quot;dataCenterTaxes&quot;: [&#xA;        {&#xA;          &quot;totalTaxes&quot;: 60.0,&#xA;          &quot;ramTaxes&quot;: 10.0,&#xA;          &quot;dcpuTaxes&quot;: 10.0,&#xA;          &quot;bandwidthTaxes&quot;: 10.0,&#xA;          &quot;primaryStorageTaxes&quot;: 10.0,&#xA;          &quot;secondaryStorageTaxes&quot;: 10.0,&#xA;          &quot;softwareTaxes&quot;: 10.0,&#xA;          &quot;ipAddressTaxes&quot;: 0.0,&#xA;          &quot;datacenterName&quot;: &quot;dataCenterName&quot;&#xA;        }&#xA;      ]&#xA;    },&#xA;    &quot;adjustments&quot;: {&#xA;      &quot;adjustmentType&quot;: [&#xA;        {&#xA;          &quot;date&quot;: &quot;Feb 27, 2015 11:44:30 AM&quot;,&#xA;          &quot;description&quot;: &quot;SomeTypeofAdjustment&quot;,&#xA;          &quot;ammount&quot;: 10.0&#xA;        }&#xA;      ],&#xA;      &quot;adjustmentTotal&quot;: 10.0&#xA;    },&#xA;    &quot;usage&quot;: {&#xA;      &quot;workplaceUsageType&quot;: [&#xA;        {&#xA;          &quot;workplaceName&quot;: &quot;workplacename&quot;,&#xA;          &quot;workplaceId&quot;: &quot;workplaceID&quot;,&#xA;          &quot;totalUsage&quot;: 70.0,&#xA;          &quot;ramUsage&quot;: 10.0,&#xA;          &quot;cpuUsage&quot;: 10.0,&#xA;          &quot;bandwidthUsage&quot;: 10.0,&#xA;          &quot;primaryStorageUsage&quot;: 10.0,&#xA;          &quot;secondaryStorageUsage&quot;: 10.0,&#xA;          &quot;softwareUsage&quot;: 10.0,&#xA;          &quot;ipAddressUsage&quot;: 10.0&#xA;        }&#xA;      ],&#xA;      &quot;adjustmentTotal&quot;: 10.0&#xA;    },&#xA;    &quot;workplaceUsage&quot;: {&#xA;      &quot;workplaceName&quot;: &quot;workplacename&quot;,&#xA;      &quot;workplaceId&quot;: &quot;workplaceID&quot;,&#xA;      &quot;totalUsage&quot;: 70.0,&#xA;      &quot;ramUsage&quot;: 10.0,&#xA;      &quot;cpuUsage&quot;: 10.0,&#xA;      &quot;bandwidthUsage&quot;: 10.0,&#xA;      &quot;primaryStorageUsage&quot;: 10.0,&#xA;      &quot;secondaryStorageUsage&quot;: 10.0,&#xA;      &quot;softwareUsage&quot;: 10.0,&#xA;      &quot;ipAddressUsage&quot;: 10.0&#xA;    }&#xA;  }&#xA;}" doc:name="Set Payload" />
     </flow>
-    <flow name="get:/product/templatePrices:api-config">
+    <flow name="get:/product/templatePrices:api-config" doc:name="get:/product/templatePrices:api-config">
         <set-payload value="{&#xA;  {&#xA;    &quot;accountNumber&quot;: &quot;AcctNo123&quot;,&#xA;    &quot;computeofferingID&quot;: &quot;offeringID123&quot;,&#xA;    &quot;templatePriceTypes&quot;: [&#xA;      {&#xA;        &quot;templateID&quot;: &quot;templateID123&quot;,&#xA;        &quot;unitPrice&quot;: 25.0&#xA;      },&#xA;      {&#xA;        &quot;templateID&quot;: &quot;templateID1234&quot;,&#xA;        &quot;unitPrice&quot;: 1050.0&#xA;      }&#xA;    ]&#xA;  }&#xA;}" doc:name="Set Payload" />
     </flow>
-    <flow name="get:/account/customerAccount:api-config">
+    <flow name="get:/account/customerAccount:api-config" doc:name="get:/account/customerAccount:api-config">
         <set-payload value="{&#xA;  &quot;account&quot;: &#xA;    {&#xA;        &quot;accountNumber&quot;: &quot;SFDCID? SID?  someID?&quot;,&#xA;        &quot;accountName&quot;: &quot;AcctName123&quot;,&#xA;        &quot;address&quot;: &quot;ADDRESS TYPE Not Defined&quot;,&#xA;        &quot;contacts&quot;: &quot;Contacts type not defined&quot;,&#xA;        &quot;paymentTerms&quot;: &quot;Payment Terms Type not defined&quot;&#xA;        &#xA;      }&#xA;        &#xA; }" doc:name="Set Payload"/>
     </flow>
+    <!-- 
+    <flow name="hbase-poc" doc:name="hbase-poc">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
+        <set-payload doc:name="Set Payload"/>
+  		<hbase:put-value config-ref="hbaseTest" columnFamilyName="Weather" columnQualifier="Temperature" rowKey="#[header:session:cityIcao]" tableName="WeatherObservations" value-ref="#[json:weatherObservation/temperature]" doc:name="Hbase"/>
+  		<logger level="INFO" message="post-hbase-put payload: #[payload]"/>
+    </flow>
+     -->
 </mule>

@@ -2,23 +2,6 @@
 title: cloud 2.0 API
 baseUri: http://localhost:8081/api/v0
 version: v0.1
-/account:
-  description: Account Information
-  /customerAccount:
-    description: Retrieve Customer related information
-    # @Suman: Customer or Account?
-    get:
-      description: Get the customer information
-      queryParameters:
-        email:
-          description: Customer related contact email
-          required: true
-          type: string
-      responses:
-       200:
-        body:
-          application/json:
-            example: !include examples/account-get-example.json
                
 /invoices:
   description: Retrieve list of invoices related information for a specific account and a date range
@@ -157,7 +140,7 @@ version: v0.1
                   }        
     
 /customers:
-  description: Retrieve list of customers
+  description: Retrieve list of Customers
   get:
     responses:
       200:
@@ -165,5 +148,63 @@ version: v0.1
           application/json:
             schema: !include schemas/customer-schema.json
             example: !include examples/customers-get-example.json
+  /{customerId}:
+    description: Retrieve a specific Customer
+    # Note: use a helper key rather than a Pkey
+    get:
+      responses:
+       200:
+        body:
+          application/json:
+            example: !include examples/customer-get-example.json         
             
+    /customerAssociatedAccounts:
+      description: Retrieve list of Customer Associated Accounts for a given customer Id
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                example: !include examples/customerAssociatedAccounts-get-example.json
+      /{customerAssociatedAccountId}:
+        description: Retrieve a specific Customer Associated Account
+        get:
+          responses:
+           200:
+            body:
+              application/json:
+                example: !include examples/customerAssociatedAccount-get-example.json                
+    /customerBillingAccounts:
+      description: Retrieve list of Customer Billing Accounts for a given customer Id
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                example: !include examples/customerBillingAccounts-get-example.json
+      /{customerBillingAccountId}:
+        description: Retrieve a specific Customer Billing Account
+        get:
+          responses:
+           200:
+            body:
+              application/json:
+                example: !include examples/customerAssociatedAccount-get-example.json                
+                
+# other entities to define as an API
+# Address + AddressType, AddressRelationship
+# CustomerContact + Type + Relat
+# SGASContact + type + relat + Group
+# Contract + 11 related tables
+# Order + OrderLineItem, OrderType, OrderStatus
+# Product + 9 related tables
+# CustomerType
+# CustomerRelationship
+# CustomerStatus
+# Opportunity
+# SizeInIndustry
+# Industry
+# Invoice + InvoiceLineItem, InvoiceType, InvoiceRelationship
+# Usage + usageType, usageDetails
+
  

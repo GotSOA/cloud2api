@@ -1,0 +1,4 @@
+{
+    "status": "ACK",
+    "confirmationId": "some-unique-mule-message-id"
+}

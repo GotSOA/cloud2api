@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.5.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <context:property-placeholder location="api.properties"/>
+    <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
+    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping" doc:name="Mapping Exception Strategy">  
+        <apikit:mapping statusCode="404"> 
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException"/>  
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"></set-property>  
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"></set-payload> 
+        </apikit:mapping>  
+        <apikit:mapping statusCode="405"> 
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException"/>  
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"></set-property>  
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"></set-payload> 
+        </apikit:mapping>  
+        <apikit:mapping statusCode="415"> 
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException"/>  
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"></set-property>  
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"></set-payload> 
+        </apikit:mapping>  
+        <apikit:mapping statusCode="406"> 
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException"/>  
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"></set-property>  
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"></set-payload> 
+        </apikit:mapping>  
+        <apikit:mapping statusCode="400"> 
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException"/>  
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"></set-property>  
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"></set-payload> 
+        </apikit:mapping> 
+    </apikit:mapping-exception-strategy>
+    <flow name="main" doc:name="main">
+        <http:inbound-endpoint address="http://localhost:${http.port}/api" doc:name="HTTP"/>
+        <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
+        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <!--  retrieveCustomer -->    
+    <flow name="get:/retrieveCustomer:apiConfig" doc:name="get:/retrieveCustomer:apiConfig">
+    	<logger message="In retrieveCustomer (GET) ..." level="INFO" doc:name="Logger"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <!-- convert inbound props into flowVars or invocation properties -->
+        <set-variable variableName="email" value="#[message.inboundProperties['http.query.params']['email']]" doc:name="set Variable email"/>
+        <set-variable variableName="companyName" value="#[message.inboundProperties['http.query.params']['companyName']]" doc:name="set Variable companyName"/>
+        <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/service-post-example.json')]" doc:name="Set Payload"/>
+       	<object-to-string-transformer doc:name="Object to String"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
+        <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
+    </flow>
+    <!-- addCloudService1 -->
+    <flow name="post:/addCloudService1:apiConfig" doc:name="post:/addCloudService1:apiConfig">
+    	<logger message="In addCloudService 1 (POST) ... " level="INFO" doc:name="Logger"/>
+    	<logger message="payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger level="INFO" message="payload: #[payload]" doc:name="Logger"/>
+		<set-variable variableName="customerId" value="#[json:id]" doc:name="set Variable customer-id"/>
+        <set-variable variableName="serviceId" value="#[json:serviceName]" doc:name="set Variable service-id"/>
+        <set-variable variableName="billingSpecifics" value="#[json:billingSpecifics]" doc:name="set Variable billing-specifics"/>  
+        <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
+        <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
+        <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>
+        <!-- map json to canonical w dataMapper -->
+        <!-- display info in canonical form -->
+        <!-- map the other way: canonical to aria -->
+        <!-- persist data to Aria -->
+        <!-- map back to canonical -->
+        <!-- map out of canonical back to json and return payload to requester -->
+        <!-- set return payload for now -->
+        <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/post-ACK-example.json')]" doc:name="Set Payload"/>
+       	<object-to-string-transformer doc:name="Object to String"/>
+		<vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
+        <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
+    </flow>
+    <!-- addCloudService2 -->
+    <flow name="post:/addCloudService2:apiConfig" doc:name="post:/addCloudService2:apiConfig">
+    	<logger message="In addCloudService 2 (POST) ..." level="INFO" doc:name="Logger"/>
+        <logger message="payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="customerId" value="#[payload.cloudCustomerId]" doc:name="set Variable customerId"/>
+        <set-variable variableName="serviceId" value="#[payload.cloudServiceName]" doc:name="set Variable serviceId"/>
+        <set-variable variableName="billingSpecifics" value="#[payload.cloudBillingSpecifics]" doc:name="set Variable billingSpecifics"/>
+        <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
+        <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
+        <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>  
+        <!-- set return payload for now -->
+        <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/post-ACK-example.json')]" doc:name="Set Payload"/>
+       	<object-to-string-transformer doc:name="Object to String"/>
+		<vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
+        <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
+    </flow>     
+    <!-- bogus request processing flow -->
+    <flow name="request-processing-flow" doc:name="request-processing-flow">
+        <vm:inbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
+		<logger level="INFO" message="received request: #[payload]" doc:name="Logger"/>
+        <echo-component doc:name="Echo"/>
+    </flow>         
+</mule>

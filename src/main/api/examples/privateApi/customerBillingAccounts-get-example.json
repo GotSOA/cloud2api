@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1001,
+		"sId": 456,
+		"globalMasterAgreementId": 777,
+		"customerTypeId": 1,
+		"customerRelationshipId": 3,
+		"contractTypeId": 21,
+		"currencyId": 1,
+		"billingAccountName": "importantUSAClient",
+		"billingContactName": "importantUSAClient",
+		"addressId": 999
+	},
+	{
+		"id": 1002,
+		"sId": 456,
+		"globalMasterAgreementId": 778,
+		"customerTypeId": 1,
+		"customerRelationshipId": 3,
+		"contractTypeId": 22,
+		"currencyId": 1,
+		"billingAccountName": "importantUSAClient",
+		"billingContactName": "importantUSAClient",
+		"addressId": 999
+	},
+	{
+		"id": 1003,
+		"sId": 456,
+		"globalMasterAgreementId": 779,
+		"customerTypeId": 1,
+		"customerRelationshipId": 3,
+		"contractTypeId": 23,
+		"currencyId": 2,
+		"billingAccountName": "importantCAClient",
+		"billingContactName": "importantCAContact",
+		"addressId": 999
+	}
+]

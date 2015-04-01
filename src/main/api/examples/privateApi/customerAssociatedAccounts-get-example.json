@@ -1,0 +1,32 @@
+[
+	{
+		"id": 123,
+		"sId": 456,
+		"associatedCustomerName": "importantClient",
+		"startDate": "2013-01-01T13:28:06.419Z",
+		"endDate": "2015-01-01T00:00:00.000Z",
+		"statusId": 7,
+		"nameChangeHistory": "TBD",
+		"addressId": 901
+	},
+	{
+		"id": 124,
+		"sId": 456,
+		"associatedCustomerName": "importantClient",
+		"startDate": "2014-01-01T13:28:06.419Z",
+		"endDate": "2015-01-01T00:00:00.000Z",
+		"statusId": 8,
+		"nameChangeHistory": "TBD",
+		"addressId": 902
+	},
+	{
+		"id": 125,
+		"sId": 456,
+		"associatedCustomerName": "importantClient",
+		"startDate": "2013-01-01T13:28:06.419Z",
+		"endDate": "2014-01-01T00:00:00.000Z",
+		"statusId": 9,
+		"nameChangeHistory": "TBD",
+		"addressId": 903
+	}
+]

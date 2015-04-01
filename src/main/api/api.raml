@@ -1,210 +1,75 @@
 #%RAML 0.8
-title: cloud 2.0 API
-baseUri: http://localhost:8081/api/v0
-version: v0.1
-               
-/invoices:
-  description: Retrieve list of invoices related information for a specific account and a date range
-  get:
-    queryParameters:
-      accountNumber:
-        description: Account Number
-        required: true
-        type: string
-      startDate:  
-        description: Start Date
-        required: true
-        type: date
-      endDate:  
-        description: End Date
-        required: true
-        type: date
-    responses:
-      200:
-        body:
-          application/json:
-            schema: !include schemas/invoice-schema.json
-            example: !include examples/invoices-get-example.json
-              
-  /{invoiceNumber}:
-    displayName: getInvoice
-    description: A specific invoice
+---
+title: Sample API
+baseUri: http://localhost:8081/api/v1
+version: 1.0
+                         
+/retrieveCustomer:
+    displayName: Retrieve Customer       
     get:
+      description: Retrieves a list of companies matching the email/domain criteria    
+      queryParameters:
+        email:
+          description: (optional) an email
+          type: string
+          required: false
+          # not required, because when profile='arizona', 
+          # the admin may be interested in looking at campaigns across all agencies
+        companyName:
+          description: the companyName (optional)
+          # could be replaced by a profileId as an integer
+          type: string
+          required: false          
       responses:
         200:
           description: |
-            Invoice retrieved successfully
+            companies retrieved successfully
           body:
             application/json:
-              schema: !include schemas/invoice-schema.json
-              example: !include examples/invoiceDetail-get-example.json
-              
-    /invoiceDetail:
-        displayName: getInvoiceDetail
-        description: Retrieves the Invoice Detail (usage, adjustments, etc.)
-        get:
-          responses:
-            200:
-              body:
-                application/json:
-                  schema: !include schemas/invoiceDetail-schema.json
-                  example: !include examples/invoiceDetail-get-example.json
-                              
-  /retrieveInvoice:
-    description: Retrieves a binary (.pdf) representation of the actual invoice.
-    get:
-      queryParameters:
-        accountNumber:
-          description: Account Number
-          required: true
-          type: string
-        invoiceNumber:
-          description: Invoice Number
-          required: true
-          type: string
+              example: !include examples/publicApi/companies-get-example.json
+                                
+/addCloudService1:
+    displayName: Add Cloud Service to Billing System 1 (json payload)          
+    post:
+      description: adds a Cloud Service Entry to the Customer's Billing Master Plan
+      body:
+        application/json:
+          schema: !include schemas/_dumb-schema.json
+          example: !include examples/publicApi/service-post-example.json
       responses:
         200:
+          description: |
+            Request Acknowledged
           body:
-             multipart/form-data:
-      
-/product:
-    description: Details regarding product
-    /templatePrices:
-      description: Computes the customer specific discounted price for an Offering in combination with all availble OS choices. The prices includes any applicable OS licensing costs (some based on attributes of the Offering). Some templates prices varies based on number of CPUs and RAM.  (OS licensing per core)
-      get:
-        queryParameters:
-          accountNumber:
-            description: Account Number
-            required: true
-            type: string
-          offeringID:
-            description: offering ID
-            required: true
-            type: string
-          templateID:
-            description: List of tempalte ID optional
-            required: false
-            type: string
-        responses:
-          200:
-            body:
-              application/json:
-                example: |
-                  {
-                    {
-                      "accountNumber": "AcctNo123",
-                      "computeofferingID": "offeringID123",
-                      "templatePriceTypes": [
-                        {
-                          "templateID": "templateID123",
-                          "unitPrice": 25.0
-                        },
-                        {
-                          "templateID": "templateID1234",
-                          "unitPrice": 1050.0
-                        }
-                      ]
-                    }
-                  }
-    /offeringPrices:
-      description: Computes the customer specific discounted price for all available Offerings.
-      get:
-        queryParameters:
-          accountNumber:
-            description: Account Number
-            required: true
-            type: string
-          offeringID:
-            description: offering ID
-            required: false
-            type: string
-        responses:
-          200:
-            body:
-              application/json:
-                example: |
-                  {
-                    {
-                      "accountNumber": "AcctNo123",
-                      "offeringPrice": [
-                        {
-                          "offeringID": "offeringID123",
-                          "unitPrice": 250.0
-                        },
-                        {
-                          "offeringID": "offeringID1234",
-                          "unitPrice": 150.0
-                        }
-                      ]
-                    }
-                  }        
-    
-/customers:
-  description: Retrieve list of Customers
-  get:
-    responses:
-      200:
-        body:
-          application/json:
-            schema: !include schemas/customer-schema.json
-            example: !include examples/customers-get-example.json
-  /{customerId}:
-    description: Retrieve a specific Customer
-    # Note: use a helper key rather than a Pkey
-    get:
-      responses:
-       200:
-        body:
-          application/json:
-            example: !include examples/customer-get-example.json         
-            
-    /customerAssociatedAccounts:
-      description: Retrieve list of Customer Associated Accounts for a given customer Id
-      get:
-        responses:
-          200:
-            body:
-              application/json:
-                example: !include examples/customerAssociatedAccounts-get-example.json
-      /{customerAssociatedAccountId}:
-        description: Retrieve a specific Customer Associated Account
-        get:
-          responses:
-           200:
-            body:
-              application/json:
-                example: !include examples/customerAssociatedAccount-get-example.json                
-    /customerBillingAccounts:
-      description: Retrieve list of Customer Billing Accounts for a given customer Id
-      get:
-        responses:
-          200:
-            body:
-              application/json:
-                example: !include examples/customerBillingAccounts-get-example.json
-      /{customerBillingAccountId}:
-        description: Retrieve a specific Customer Billing Account
-        get:
-          responses:
-           200:
-            body:
-              application/json:
-                example: !include examples/customerAssociatedAccount-get-example.json                
-                
-# other entities to define as an API
-# Address + AddressType, AddressRelationship
-# CustomerContact + Type + Relat
-# SGASContact + type + relat + Group
-# Contract + 11 related tables
-# Order + OrderLineItem, OrderType, OrderStatus
-# Product + 9 related tables
-# CustomerType
-# CustomerRelationship
-# CustomerStatus
-# Opportunity
-# SizeInIndustry
-# Industry
-# Invoice + InvoiceLineItem, InvoiceType, InvoiceRelationship
-# Usage + usageType, usageDetails
+            application/json:
+              example: |
+                {
+                  "status": "ACK"
+                }
 
- 
+/addCloudService2:
+    displayName: Add Cloud Service to Billing System 2 (form-urlencoded)          
+    post:
+      description: adds a Cloud Service Entry to the Customer's Billing Master Plan
+      body:
+        application/x-www-form-urlencoded:
+          formParameters:
+            cloudCustomerId:
+              description: the SGAS customer ID
+              type: integer
+            cloudServiceName:
+              description: the service name to add to this customers billing
+              type: string
+            cloudBillingSpecifics:
+              description: the customer billing specifics for this customer (override defaults)
+              type: string              
+      responses:
+        200:
+          description: |
+            Request Acknowledged
+          body:
+            application/json:
+              example: |
+                {
+                  "status": "ACK"
+                }                

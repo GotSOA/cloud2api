@@ -68,8 +68,19 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
         <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
         <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>
+        <component>
+      		<spring-object bean="customer">
+      			<spring:property name="companyName" value="foobar Inc."/>
+      			<spring:property name="companyDomain" value="foobar.org" />
+      			<spring:property name="lastName" value="bloggs" />
+      			<spring:property name="firstName" value="joe" />
+      			<spring:property name="phoneNumber" value="unknown" />
+      		</spring-object>
+    	</component>
+    	<logger message="verify new payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
         <!-- map json to canonical w dataMapper -->
         <!-- display info in canonical form -->
+        
         <!-- map the other way: canonical to aria -->
         <!-- persist data to Aria -->
         <!-- map back to canonical -->

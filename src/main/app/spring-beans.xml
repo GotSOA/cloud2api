@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd 
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <!-- Bean Definitions -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.sungardas.esb"></context:component-scan>   
+
+	<bean id="customer" class="com.sungardas.ebs.Customer">
+		<property name="companyName" ref="companyName"></property>
+		<property name="companyDomain" ref="companyDomain"></property>
+		<property name="lastName" ref="lastName"></property>
+		<property name="firstName" ref="firstName"></property>
+		<property name="phoneNumber" ref="phoneNumber"></property>
+	</bean>
+	
+	<bean id="product" class="com.sungardas.ebs.Product">
+		<!-- add props -->
+	</bean>
+	
+	<bean id="contact" class="com.sungardas.ebs.Contact">
+		<!-- add props -->
+	</bean>
+
+	<bean id="sgasContact" class="com.sungardas.ebs.SgasContact">
+		<!-- add props -->
+	</bean>
+
+
+	<bean id="billingAccount" class="com.sungardas.ebs.BillingAccount">
+		<!-- add props -->
+	</bean>
+	
+	<bean id="order" class="com.sungardas.ebs.Order">
+		<!-- add props -->
+	</bean>
+
+	<bean id="usage" class="com.sungardas.ebs.Usage">
+		<!-- add props -->
+	</bean>
+	
+	<bean id="address" class="com.sungardas.ebs.Address">
+		<!-- add props -->
+	</bean>
+	
+	<!-- not needed now
+	<bean id="cdr" class="com.sungardas.esb.CDR" init-method="myInit" destroy-method="myCleanUp">
+		<property name="customer" ref="customer"></property>
+	</bean>	
+	-->
+	
+	<bean id="objectStore" class="org.mule.util.store.SimpleMemoryObjectStore"/>
+	
+</beans>

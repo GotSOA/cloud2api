@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph __version="3.5.0" author="stephanerata" created="Thu Apr 02 21:45:58 EDT 2015" description="addCloudService-to-Customer" guiVersion="3.4.4.P" id="1428083487729" licenseCode="Unlicensed" licenseType="Unknown" modified="Thu Apr 02 21:45:58 EDT 2015" modifiedBy="stephanerata" name="addCloudService_to_Customer" preview-file="${Project_Home}/src/main/api/examples/publicApi/service-post-example.json" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="17" __referenceCounter="0" __sourcePath="{}/object/billingAccount" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" _parent_id="__parent_id" _type="Output" id="aee87ce2-128c-4e75-8070-3ecf50316093">
+<Record fieldDelimiter="," name="billingAccount" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="17" __sourcePath="{}/object/billingAccount/accountId" containerType="SINGLE" label="accountId" name="accountId" type="long"/>
+<Field __index="18" __sourcePath="{}/object/billingAccount/billingAddress/address1" containerType="SINGLE" label="address1" name="address1" type="string"/>
+<Field __index="19" __sourcePath="{}/object/billingAccount/billingAddress/address2" containerType="SINGLE" label="address2" name="address2" type="string"/>
+<Field __index="20" __sourcePath="{}/object/billingAccount/billingAddress/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="21" __sourcePath="{}/object/billingAccount/billingAddress/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="22" __sourcePath="{}/object/billingAccount/billingAddress/county" containerType="SINGLE" label="county" name="county" type="string"/>
+<Field __index="23" __sourcePath="{}/object/billingAccount/billingAddress/email" containerType="SINGLE" label="email" name="email" type="string"/>
+<Field __index="24" __sourcePath="{}/object/billingAccount/billingAddress/fax/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="25" __sourcePath="{}/object/billingAccount/billingAddress/fax/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="26" __sourcePath="{}/object/billingAccount/billingAddress/fax/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="30" __sourcePath="{}/object/billingAccount/billingAddress/phone2/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_1" type="integer"/>
+<Field __index="31" __sourcePath="{}/object/billingAccount/billingAddress/phone2/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_1" type="string"/>
+<Field __index="32" __sourcePath="{}/object/billingAccount/billingAddress/phone2/type" containerType="SINGLE" label="type" name="type_1" type="string"/>
+<Field __index="33" __sourcePath="{}/object/billingAccount/billingAddress/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="34" __sourcePath="{}/object/billingAccount/billingAddress/zip" containerType="SINGLE" label="zip" name="zip" type="string"/>
+<Field __index="35" __sourcePath="{}/object/billingAccount/billingContact/address/address1" containerType="SINGLE" label="address1" name="address1_1" type="string"/>
+<Field __index="36" __sourcePath="{}/object/billingAccount/billingContact/address/address2" containerType="SINGLE" label="address2" name="address2_1" type="string"/>
+<Field __index="37" __sourcePath="{}/object/billingAccount/billingContact/address/city" containerType="SINGLE" label="city" name="city_1" type="string"/>
+<Field __index="38" __sourcePath="{}/object/billingAccount/billingContact/address/country" containerType="SINGLE" label="country" name="country_1" type="string"/>
+<Field __index="39" __sourcePath="{}/object/billingAccount/billingContact/address/county" containerType="SINGLE" label="county" name="county_1" type="string"/>
+<Field __index="40" __sourcePath="{}/object/billingAccount/billingContact/address/email" containerType="SINGLE" label="email" name="email_1" type="string"/>
+<Field __index="41" __sourcePath="{}/object/billingAccount/billingContact/address/fax/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_2" type="integer"/>
+<Field __index="42" __sourcePath="{}/object/billingAccount/billingContact/address/fax/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_2" type="string"/>
+<Field __index="43" __sourcePath="{}/object/billingAccount/billingContact/address/fax/type" containerType="SINGLE" label="type" name="type_2" type="string"/>
+<Field __index="47" __sourcePath="{}/object/billingAccount/billingContact/address/phone2/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_3" type="integer"/>
+<Field __index="48" __sourcePath="{}/object/billingAccount/billingContact/address/phone2/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_3" type="string"/>
+<Field __index="49" __sourcePath="{}/object/billingAccount/billingContact/address/phone2/type" containerType="SINGLE" label="type" name="type_3" type="string"/>
+<Field __index="50" __sourcePath="{}/object/billingAccount/billingContact/address/state" containerType="SINGLE" label="state" name="state_1" type="string"/>
+<Field __index="51" __sourcePath="{}/object/billingAccount/billingContact/address/zip" containerType="SINGLE" label="zip" name="zip_1" type="string"/>
+<Field __index="52" __sourcePath="{}/object/billingAccount/billingContact/contactType" containerType="SINGLE" label="contactType" name="contactType" type="string"/>
+<Field __index="53" __sourcePath="{}/object/billingAccount/billingContact/email" containerType="SINGLE" label="email" name="email_2" type="string"/>
+<Field __index="54" __sourcePath="{}/object/billingAccount/billingContact/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="55" __sourcePath="{}/object/billingAccount/billingContact/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="56" __sourcePath="{}/object/billingAccount/billingContact/middleInitial" containerType="SINGLE" label="middleInitial" name="middleInitial" type="string"/>
+<Field __index="57" __sourcePath="{}/object/billingAccount/billingContact/salutation" containerType="SINGLE" label="salutation" name="salutation" type="string"/>
+<Field __index="58" __sourcePath="{}/object/billingAccount/billingContact/title" containerType="SINGLE" label="title" name="title" type="string"/>
+<Field __index="59" __sourcePath="{}/object/billingAccount/currency" containerType="SINGLE" label="currency" name="currency" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="1db97cb6-cb72-46c3-bd5e-0a76d415a28f">
+<Record fieldDelimiter="," name="Customer" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/address/address1" containerType="SINGLE" label="address1" name="address1" type="string"/>
+<Field __index="1" __sourcePath="{}/object/address/address2" containerType="SINGLE" label="address2" name="address2" type="string"/>
+<Field __index="2" __sourcePath="{}/object/address/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="3" __sourcePath="{}/object/address/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="4" __sourcePath="{}/object/address/county" containerType="SINGLE" label="county" name="county" type="string"/>
+<Field __index="5" __sourcePath="{}/object/address/email" containerType="SINGLE" label="email" name="email" type="string"/>
+<Field __index="6" __sourcePath="{}/object/address/fax/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="7" __sourcePath="{}/object/address/fax/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="8" __sourcePath="{}/object/address/fax/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="12" __sourcePath="{}/object/address/phone2/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_1" type="integer"/>
+<Field __index="13" __sourcePath="{}/object/address/phone2/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_1" type="string"/>
+<Field __index="14" __sourcePath="{}/object/address/phone2/type" containerType="SINGLE" label="type" name="type_1" type="string"/>
+<Field __index="15" __sourcePath="{}/object/address/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="16" __sourcePath="{}/object/address/zip" containerType="SINGLE" label="zip" name="zip" type="string"/>
+<Field __index="60" __sourcePath="{}/object/companyDomain" containerType="SINGLE" label="companyDomain" name="companyDomain" type="string"/>
+<Field __index="61" __sourcePath="{}/object/companyName" containerType="SINGLE" label="companyName" name="companyName" type="string"/>
+<Field __index="86" __sourcePath="{}/object/customerType" containerType="SINGLE" label="customerType" name="customerType" type="string"/>
+<Field __index="87" __sourcePath="{}/object/parentId" containerType="SINGLE" label="parentId" name="parentId" type="string"/>
+<Field __index="113" __sourcePath="{}/object/sgid" containerType="SINGLE" label="sgid" name="sgid" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="62" __referenceCounter="0" __sourcePath="{}/object/customerContact" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" _parent_id="__parent_id" _type="Output" id="e290b530-e904-421c-b705-c13ed712b59a">
+<Record fieldDelimiter="," name="customerContact" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="62" __sourcePath="{}/object/customerContact/address/address1" containerType="SINGLE" label="address1" name="address1" type="string"/>
+<Field __index="63" __sourcePath="{}/object/customerContact/address/address2" containerType="SINGLE" label="address2" name="address2" type="string"/>
+<Field __index="64" __sourcePath="{}/object/customerContact/address/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="65" __sourcePath="{}/object/customerContact/address/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="66" __sourcePath="{}/object/customerContact/address/county" containerType="SINGLE" label="county" name="county" type="string"/>
+<Field __index="67" __sourcePath="{}/object/customerContact/address/email" containerType="SINGLE" label="email" name="email" type="string"/>
+<Field __index="68" __sourcePath="{}/object/customerContact/address/fax/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="69" __sourcePath="{}/object/customerContact/address/fax/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="70" __sourcePath="{}/object/customerContact/address/fax/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="74" __sourcePath="{}/object/customerContact/address/phone2/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_1" type="integer"/>
+<Field __index="75" __sourcePath="{}/object/customerContact/address/phone2/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_1" type="string"/>
+<Field __index="76" __sourcePath="{}/object/customerContact/address/phone2/type" containerType="SINGLE" label="type" name="type_1" type="string"/>
+<Field __index="77" __sourcePath="{}/object/customerContact/address/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="78" __sourcePath="{}/object/customerContact/address/zip" containerType="SINGLE" label="zip" name="zip" type="string"/>
+<Field __index="79" __sourcePath="{}/object/customerContact/contactType" containerType="SINGLE" label="contactType" name="contactType" type="string"/>
+<Field __index="80" __sourcePath="{}/object/customerContact/email" containerType="SINGLE" label="email" name="email_1" type="string"/>
+<Field __index="81" __sourcePath="{}/object/customerContact/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="82" __sourcePath="{}/object/customerContact/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="83" __sourcePath="{}/object/customerContact/middleInitial" containerType="SINGLE" label="middleInitial" name="middleInitial" type="string"/>
+<Field __index="84" __sourcePath="{}/object/customerContact/salutation" containerType="SINGLE" label="salutation" name="salutation" type="string"/>
+<Field __index="85" __sourcePath="{}/object/customerContact/title" containerType="SINGLE" label="title" name="title" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="b7272a4d-dbb9-4a9c-ad79-df28fc7de866">
+<Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/id" containerType="SINGLE" label="id" name="id" type="integer"/>
+<Field __index="1" __sourcePath="{}/object/companyName" containerType="SINGLE" label="companyName" name="companyName" type="string"/>
+<Field __index="2" __sourcePath="{}/object/billingSpecifics" containerType="SINGLE" label="billingSpecifics" name="billingSpecifics" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="87" __referenceCounter="0" __sourcePath="{}/object/order" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" _parent_id="__parent_id" _type="Output" id="22dc61e2-5562-4f8c-a89f-1683b5a9c9c8">
+<Record fieldDelimiter="," name="order" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="9" __referenceCounter="0" __sourcePath="{}/object/address/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" _parent_id="__parent_id" _type="Output" id="8a0c2e1a-d1f1-40fa-9934-f1124d6bf9bf">
+<Record fieldDelimiter="," name="phone" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="9" __sourcePath="{}/object/address/phone/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="10" __sourcePath="{}/object/address/phone/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="11" __sourcePath="{}/object/address/phone/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="27" __referenceCounter="0" __sourcePath="{}/object/billingAccount/billingAddress/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="aee87ce2-128c-4e75-8070-3ecf50316093" _parent_id="__parent_id" _type="Output" id="9c31dac7-870f-4d66-a119-a4fdd81b14cf">
+<Record fieldDelimiter="," name="phone" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="27" __sourcePath="{}/object/billingAccount/billingAddress/phone/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="28" __sourcePath="{}/object/billingAccount/billingAddress/phone/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="29" __sourcePath="{}/object/billingAccount/billingAddress/phone/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="44" __referenceCounter="0" __sourcePath="{}/object/billingAccount/billingContact/address/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="aee87ce2-128c-4e75-8070-3ecf50316093" _parent_id="__parent_id" _type="Output" id="bbc3e73d-af88-4d16-8719-f50417996bf9">
+<Record fieldDelimiter="," name="phone" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="44" __sourcePath="{}/object/billingAccount/billingContact/address/phone/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="45" __sourcePath="{}/object/billingAccount/billingContact/address/phone/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="46" __sourcePath="{}/object/billingAccount/billingContact/address/phone/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="71" __referenceCounter="0" __sourcePath="{}/object/customerContact/address/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e290b530-e904-421c-b705-c13ed712b59a" _parent_id="__parent_id" _type="Output" id="1b8f6b1c-baef-4099-9b70-ff5649db8041">
+<Record fieldDelimiter="," name="phone" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="71" __sourcePath="{}/object/customerContact/address/phone/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="72" __sourcePath="{}/object/customerContact/address/phone/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="73" __sourcePath="{}/object/customerContact/address/phone/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="97" __referenceCounter="0" __sourcePath="{}/object/sgasContact/address/phone" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7b23f8c3-7829-4011-b66d-8a8c52fd2ae0" _parent_id="__parent_id" _type="Output" id="c9174771-73eb-4e03-9512-d7e5a52ab52e">
+<Record fieldDelimiter="," name="phone" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="97" __sourcePath="{}/object/sgasContact/address/phone/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="98" __sourcePath="{}/object/sgasContact/address/phone/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="99" __sourcePath="{}/object/sgasContact/address/phone/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="88" __referenceCounter="0" __sourcePath="{}/object/sgasContact" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" _parent_id="__parent_id" _type="Output" id="7b23f8c3-7829-4011-b66d-8a8c52fd2ae0">
+<Record fieldDelimiter="," name="sgasContact" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="88" __sourcePath="{}/object/sgasContact/address/address1" containerType="SINGLE" label="address1" name="address1" type="string"/>
+<Field __index="89" __sourcePath="{}/object/sgasContact/address/address2" containerType="SINGLE" label="address2" name="address2" type="string"/>
+<Field __index="90" __sourcePath="{}/object/sgasContact/address/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="91" __sourcePath="{}/object/sgasContact/address/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="92" __sourcePath="{}/object/sgasContact/address/county" containerType="SINGLE" label="county" name="county" type="string"/>
+<Field __index="93" __sourcePath="{}/object/sgasContact/address/email" containerType="SINGLE" label="email" name="email" type="string"/>
+<Field __index="94" __sourcePath="{}/object/sgasContact/address/fax/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="integer"/>
+<Field __index="95" __sourcePath="{}/object/sgasContact/address/fax/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+<Field __index="96" __sourcePath="{}/object/sgasContact/address/fax/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="100" __sourcePath="{}/object/sgasContact/address/phone2/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_1" type="integer"/>
+<Field __index="101" __sourcePath="{}/object/sgasContact/address/phone2/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber_1" type="string"/>
+<Field __index="102" __sourcePath="{}/object/sgasContact/address/phone2/type" containerType="SINGLE" label="type" name="type_1" type="string"/>
+<Field __index="103" __sourcePath="{}/object/sgasContact/address/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="104" __sourcePath="{}/object/sgasContact/address/zip" containerType="SINGLE" label="zip" name="zip" type="string"/>
+<Field __index="105" __sourcePath="{}/object/sgasContact/department" containerType="SINGLE" label="department" name="department" type="string"/>
+<Field __index="106" __sourcePath="{}/object/sgasContact/email" containerType="SINGLE" label="email" name="email_1" type="string"/>
+<Field __index="107" __sourcePath="{}/object/sgasContact/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="108" __sourcePath="{}/object/sgasContact/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="109" __sourcePath="{}/object/sgasContact/middleInitial" containerType="SINGLE" label="middleInitial" name="middleInitial" type="string"/>
+<Field __index="110" __sourcePath="{}/object/sgasContact/salutation" containerType="SINGLE" label="salutation" name="salutation" type="string"/>
+<Field __index="111" __sourcePath="{}/object/sgasContact/teamName" containerType="SINGLE" label="teamName" name="teamName" type="string"/>
+<Field __index="112" __sourcePath="{}/object/sgasContact/title" containerType="SINGLE" label="title" name="title" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="60" __referenceCounter="0" __sourcePath="{}/object/billingAccount/usage" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="aee87ce2-128c-4e75-8070-3ecf50316093" _parent_id="__parent_id" _type="Output" id="b9754657-4570-4ae3-8fbd-be55406c03c3">
+<Record fieldDelimiter="," name="usage" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <address>
+    <address1>$0.address1</address1>
+    <address2>$0.address2</address2>
+    <city>$0.city</city>
+    <country>$0.country</country>
+    <county>$0.county</county>
+    <email>$0.email</email>
+    <fax>
+      <countryCode>$0.countryCode</countryCode>
+      <phoneNumber>$0.phoneNumber</phoneNumber>
+      <type>$0.type</type>
+    </fax>
+    <phone2>
+      <countryCode>$0.countryCode_1</countryCode>
+      <phoneNumber>$0.phoneNumber_1</phoneNumber>
+      <type>$0.type_1</type>
+    </phone2>
+    <state>$0.state</state>
+    <zip>$0.zip</zip>
+  </address>
+  <companyDomain>$0.companyDomain</companyDomain>
+  <companyName>$0.companyName</companyName>
+  <customerType>$0.customerType</customerType>
+  <parentId>$0.parentId</parentId>
+  <sgid>$0.sgid</sgid>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="com.sungardas.esb.model.Customer"/>
+  <typed-object type="com.sungardas.esb.model.Usage"/>
+  <typed-object type="com.sungardas.esb.model.Customer">
+    <typed-object-ref name="address" type-ref="com.sungardas.esb.model.Address"/>
+    <schema-collection name="billingAccount" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.BillingAccount"/>
+    </schema-collection>
+    <typed-object-ref name="companyDomain" type-ref="java.lang.String"/>
+    <typed-object-ref name="companyName" type-ref="java.lang.String"/>
+    <schema-collection name="customerContact" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.CustomerContact"/>
+    </schema-collection>
+    <typed-object-ref name="customerType" type-ref="java.lang.String"/>
+    <schema-collection name="order" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.Order"/>
+    </schema-collection>
+    <typed-object-ref name="parentId" type-ref="java.lang.String"/>
+    <schema-collection name="sgasContact" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.SgasContact"/>
+    </schema-collection>
+    <typed-object-ref name="sgid" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.sungardas.esb.model.BillingAccount">
+    <typed-object-ref name="accountId" type-ref="long"/>
+    <typed-object-ref name="billingAddress" type-ref="com.sungardas.esb.model.Address"/>
+    <typed-object-ref name="billingContact" type-ref="com.sungardas.esb.model.CustomerContact"/>
+    <typed-object-ref name="currency" type-ref="java.lang.String"/>
+    <schema-collection name="usage" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.Usage"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.sungardas.esb.model.CustomerContact">
+    <typed-object-ref name="address" type-ref="com.sungardas.esb.model.Address"/>
+    <typed-object-ref name="contactType" type-ref="java.lang.String"/>
+    <typed-object-ref name="email" type-ref="java.lang.String"/>
+    <typed-object-ref name="firstName" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastName" type-ref="java.lang.String"/>
+    <typed-object-ref name="middleInitial" type-ref="java.lang.String"/>
+    <typed-object-ref name="salutation" type-ref="java.lang.String"/>
+    <typed-object-ref name="title" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.sungardas.esb.model.SgasContact">
+    <typed-object-ref name="address" type-ref="com.sungardas.esb.model.Address"/>
+    <typed-object-ref name="department" type-ref="java.lang.String"/>
+    <typed-object-ref name="email" type-ref="java.lang.String"/>
+    <typed-object-ref name="firstName" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastName" type-ref="java.lang.String"/>
+    <typed-object-ref name="middleInitial" type-ref="java.lang.String"/>
+    <typed-object-ref name="salutation" type-ref="java.lang.String"/>
+    <typed-object-ref name="teamName" type-ref="java.lang.String"/>
+    <typed-object-ref name="title" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="int"/>
+  <typed-object type="com.sungardas.esb.model.Order"/>
+  <typed-object type="com.sungardas.esb.model.Address$Phone">
+    <typed-object-ref name="countryCode" type-ref="int"/>
+    <typed-object-ref name="phoneNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.sungardas.esb.model.Address">
+    <typed-object-ref name="address1" type-ref="java.lang.String"/>
+    <typed-object-ref name="address2" type-ref="java.lang.String"/>
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="email" type-ref="java.lang.String"/>
+    <typed-object-ref name="fax" type-ref="com.sungardas.esb.model.Address$Phone"/>
+    <schema-collection name="phone" type="java.util.List">
+      <typed-object-ref type-ref="com.sungardas.esb.model.Address$Phone"/>
+    </schema-collection>
+    <typed-object-ref name="phone2" type-ref="com.sungardas.esb.model.Address$Phone"/>
+    <typed-object-ref name="state" type-ref="java.lang.String"/>
+    <typed-object-ref name="zip" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="long"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_OBJECT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.sgid = num2str(input.id);
+output.companyName = input.companyName;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="JSON READER" guiX="20" guiY="20" id="JSON_READER0" type="JSON_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context xpath="/root">
+  <Context outPort="0" sequenceField="__id" xpath="object">
+    <Mapping cloverField="id" trim="true" xpath="id"/>
+    <Mapping cloverField="companyName" trim="true" xpath="companyName"/>
+    <Mapping cloverField="billingSpecifics" trim="true" xpath="billingSpecifics"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="__isJsonSchema"><![CDATA[false]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/main/api/examples/publicApi/service-post-example.json]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="1db97cb6-cb72-46c3-bd5e-0a76d415a28f" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="b7272a4d-dbb9-4a9c-ad79-df28fc7de866" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_OBJECT:0"/>
+</Phase>
+</Graph>

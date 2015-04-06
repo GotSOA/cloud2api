@@ -68,6 +68,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
         <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
         <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>
+        <!-- 
         <component>
       		<spring-object bean="customer">
       			<spring:property name="companyName" value="foobar Inc."/>
@@ -77,6 +78,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
       			<spring:property name="phoneNumber" value="unknown" />
       		</spring-object>
     	</component>
+    	 -->
     	<logger message="verify new payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
         <!-- map json to canonical w dataMapper -->
         <!-- display info in canonical form -->

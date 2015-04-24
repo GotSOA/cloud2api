@@ -1,4 +1,5 @@
 {
+	"method": "POST",
 	"status": "ACK",
 	"confirmationId": "123ZULU321"
 }

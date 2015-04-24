@@ -72,6 +72,10 @@
                             <groupId>org.mule.modules</groupId>
                             <artifactId>mule-module-apikit</artifactId>
                         </inclusion>
+                    <inclusion>
+                            <groupId>org.mule.modules</groupId>
+                            <artifactId>mule-module-mongo</artifactId>
+                        </inclusion>
                     </inclusions>
                 </configuration>
 			</plugin>
@@ -420,6 +424,23 @@
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-apikit</artifactId>
             <version>1.5.0</version>
+        </dependency>
+    <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-jersey</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-json</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-mongo</artifactId>
+            <version>3.6.0</version>
         </dependency>
     </dependencies>
 

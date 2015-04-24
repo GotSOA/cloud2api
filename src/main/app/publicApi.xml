@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json"
 	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.5.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
@@ -9,8 +9,12 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
+
     <context:property-placeholder location="api.properties"/>
+    <!-- <context:property-placeholder location="api.properties, publicApi.properties, ${mule-env}-publicApi.properties"/> -->
+    
     <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
     <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping" doc:name="Mapping Exception Strategy">  
         <apikit:mapping statusCode="404"> 
@@ -39,6 +43,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"></set-payload> 
         </apikit:mapping> 
     </apikit:mapping-exception-strategy>
+    <data-mapper:config name="addCloudService_to_Customer" transformationGraphPath="addcloudservice-to-customer.grf" doc:name="addCloudService_to_Customer"/>
     <flow name="main" doc:name="main">
         <http:inbound-endpoint address="http://localhost:${http.port}/api" doc:name="HTTP"/>
         <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
@@ -56,8 +61,8 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
         <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
     </flow>
-    <!-- addCloudService1 -->
-    <flow name="post:/addCloudService1:apiConfig" doc:name="post:/addCloudService1:apiConfig">
+    <!-- addCloudService -->
+    <flow name="post:/addCloudService:apiConfig" doc:name="post:/addCloudService:apiConfig">
     	<logger message="In addCloudService 1 (POST) ... " level="INFO" doc:name="Logger"/>
     	<logger message="payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
         <json:object-to-json-transformer doc:name="Object to JSON"/>
@@ -68,32 +73,23 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
         <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
         <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>
-        <!-- 
-        <component>
-      		<spring-object bean="customer">
-      			<spring:property name="companyName" value="foobar Inc."/>
-      			<spring:property name="companyDomain" value="foobar.org" />
-      			<spring:property name="lastName" value="bloggs" />
-      			<spring:property name="firstName" value="joe" />
-      			<spring:property name="phoneNumber" value="unknown" />
-      		</spring-object>
-    	</component>
-    	 -->
-    	<logger message="verify new payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
+        <data-mapper:transform config-ref="addCloudService_to_Customer" doc:name="addCloudService-to-Customer"/>
+    	<logger message="verify new payload type: #[payload.getClass()]" level="INFO" doc:name="Verify new payload type"/>
+    	<logger message="Sgid: #[payload.sgid]" level="INFO" doc:name="get Sgid"/>
+    	<logger message="CompanyName: #[payload.companyName]" level="INFO" doc:name="get CompanyName"/>
         <!-- map json to canonical w dataMapper -->
         <!-- display info in canonical form -->
-        
         <!-- map the other way: canonical to aria -->
         <!-- persist data to Aria -->
         <!-- map back to canonical -->
         <!-- map out of canonical back to json and return payload to requester -->
-        <!-- set return payload for now -->
+        <!-- set mock payload from Aria -->
         <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/post-ACK-example.json')]" doc:name="Set Payload"/>
        	<object-to-string-transformer doc:name="Object to String"/>
-		<vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
+        <vm:outbound-endpoint exchange-pattern="request-response" path="Q.processRequest" doc:name="VM-processRequest"/>
         <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
     </flow>
-    <!-- addCloudService2 -->
+    <!-- addCloudService2
     <flow name="post:/addCloudService2:apiConfig" doc:name="post:/addCloudService2:apiConfig">
     	<logger message="In addCloudService 2 (POST) ..." level="INFO" doc:name="Logger"/>
         <logger message="payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
@@ -103,12 +99,26 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
         <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
         <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>  
-        <!-- set return payload for now -->
         <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/post-ACK-example.json')]" doc:name="Set Payload"/>
        	<object-to-string-transformer doc:name="Object to String"/>
 		<vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
-        <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
-    </flow>     
+    </flow>
+    -->
+    
+    <!--
+    <flow name="publicApiFlow1" doc:name="publicApiFlow1">
+         <vm:inbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.aria" />
+        <enricher doc:name="Message Enricher" target="myFooVar">
+            <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" method="POST" doc:name="HTTP"/>
+        </enricher>
+        <data-mapper:transform doc:name="DataMapper"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <hbase:add-column-family config-ref="" columnFamilyName="" tableName="" doc:name="HBase"/>
+        <mongo:add-user config-ref="" newPassword="" newUsername="" doc:name="Mongo DB"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow> 
+    -->   
+     
     <!-- bogus request processing flow -->
     <flow name="request-processing-flow" doc:name="request-processing-flow">
         <vm:inbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />

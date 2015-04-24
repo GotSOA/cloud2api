@@ -1,0 +1,56 @@
+[
+	{
+		"id": 12345,
+		"customerId": 987,
+		"salutation": "Ms.",	
+		"firstName": "Jane",
+		"lastName": "Doe",
+		"middleInitial": "K",
+		"title": "Network Expert",
+		"email": "fake.jane.doe@sungardas.com",
+		"address": {
+			"id": 11111,
+			"address1": "123 some street",
+			"address2": "ste A",
+			"city": "someCity",
+			"county": "Alameda",
+			"state": "CA",
+			"zip": "95955",
+			"country": "US",
+			"phone": [{"type": "work", "countryCode": "US", "phoneNumber": "415-555-9911"},{"type": "fax", "countryCode": "US", "phoneNumber": "415-555-9922"}],
+			"email": "redundant.jane.doe@personal.com",
+			"addressTypeDescription": "work"
+		},
+		"contactType": "SUNGARD",
+		"role": "SME",	
+		"department": "IT",
+		"teamName": "ATeam"
+	},
+	{
+		"id": 12346,
+		"customerId": 987,
+		"salutation": "Ms.",	
+		"firstName": "Joe",
+		"lastName": "Bloggs",
+		"middleInitial": "K",
+		"title": "Network Expert",
+		"email": "fake.joe.bloggs@somecustomer.com",
+		"address": {
+			"id": 11111,
+			"address1": "123 some street",
+			"address2": "ste B",
+			"city": "someCity",
+			"county": "Santa Clara",
+			"state": "CA",
+			"zip": "95988",
+			"country": "US",
+			"phone": [{"type": "cell", "countryCode": "US", "phoneNumber": "415-555-5501"},{"type": "fax", "countryCode": "US", "phoneNumber": "415-555-5502"}],
+			"email": "redundant.joe.bloggs@personal.com",
+			"addressTypeDescription": "personal"
+		},
+		"contactType": "CUSTOMER",
+		"role": "BILLING",	
+		"department": "AP",
+		"teamName": "moneyTeam"
+	}
+]

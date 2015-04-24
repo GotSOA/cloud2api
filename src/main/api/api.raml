@@ -1,75 +1,330 @@
 #%RAML 0.8
 ---
-title: Sample API
-baseUri: http://localhost:8081/api/v1
+title: Cloud2 Public API
+baseUri: http://0.0.0.0:8081/api/v1
 version: 1.0
-                         
-/retrieveCustomer:
-    displayName: Retrieve Customer       
-    get:
-      description: Retrieves a list of companies matching the email/domain criteria    
-      queryParameters:
-        email:
-          description: (optional) an email
-          type: string
-          required: false
-          # not required, because when profile='arizona', 
-          # the admin may be interested in looking at campaigns across all agencies
-        companyName:
-          description: the companyName (optional)
-          # could be replaced by a profileId as an integer
-          type: string
-          required: false          
+
+/createCustomerAccount:
+    displayName: Create a customer account in the Billing System          
+    post:
+      description: adds a Customer Account Entry
+      body:
+        application/json:
+          schema: !include schemas/_dumb-schema.json
+          example: !include examples/publicApi/customerAccount-post-example.json
       responses:
         200:
           description: |
-            companies retrieved successfully
+            Request Acknowledged
           body:
             application/json:
-              example: !include examples/publicApi/companies-get-example.json
-                                
-/addCloudService1:
-    displayName: Add Cloud Service to Billing System 1 (json payload)          
+              example: !include examples/publicApi/ack-POST-example.json                         
+/retrieveCustomerAccounts:
+    displayName: Retrieve CustomerAccounts       
+    get:
+      description: Retrieves a list of customerAccounts matching the email/domain criteria    
+      queryParameters:
+        email:
+          description: an email (optional) will provide a domain name
+          type: string
+          required: false
+        companyName:
+          description: a companyName (optional)
+          type: string
+          required: false                     
+      responses:
+        200:
+          description: |
+            customerAccounts retrieved successfully
+          body:
+            application/json:
+              example: !include examples/publicApi/customerAccounts-get-example.json
+    /{customerAccountId}:
+      displayName: getcustomerAccountById
+      description: A specific customerAccount (by Id)
+      get:
+        responses:
+          200:
+            description: |
+              customerAccount retrieved successfully
+            body:
+              application/json:
+                schema: !include schemas/_dumb-schema.json
+                example: !include examples/publicApi/customerAccount-get-example.json  
+
+      /retrieveAccountContacts:
+          displayName: Retrieve AccountContacts       
+          get:
+            description: Retrieves a list of Account Contacts matching the customerAccountId   
+#            queryParameters:
+#              customerId:
+#                description: a given customerAccountId
+#                type: string
+#                required: true                     
+            responses:
+              200:
+                description: |
+                  AccountContacts retrieved successfully
+                body:
+                  application/json:
+                    example: !include examples/publicApi/contacts-get-example.json
+          /{contactId}:
+            displayName: getContactById
+            description: A specific contact (by Id)
+            get:
+              responses:
+                200:
+                  description: |
+                    accountContact retrieved successfully
+                  body:
+                    application/json:
+                      schema: !include schemas/_dumb-schema.json
+                      example: !include examples/publicApi/contact-get-example.json            
+            put:                           
+              responses:
+                200:
+                  description: |
+                    accountContact updated successfully
+                  body:
+                    application/json:
+                      example: !include examples/publicApi/ack-PUT-example.json
+#                                                                              
+/addCloudService:
+    displayName: Add Cloud Service to Billing System         
     post:
       description: adds a Cloud Service Entry to the Customer's Billing Master Plan
       body:
         application/json:
           schema: !include schemas/_dumb-schema.json
-          example: !include examples/publicApi/service-post-example.json
+          example: !include examples/publicApi/cloudService-post-example.json
       responses:
         200:
           description: |
-            Request Acknowledged
+            cloudService created successfully
           body:
             application/json:
-              example: |
-                {
-                  "status": "ACK"
-                }
-
-/addCloudService2:
-    displayName: Add Cloud Service to Billing System 2 (form-urlencoded)          
+              example: !include examples/publicApi/ack-POST-example.json
+/retrieveCloudServices:
+    displayName: Retrieve Cloud Services       
+    get:
+      description: Retrieves Cloud Services for a given customerId and billingAccountId    
+      queryParameters:
+        customerId:
+          description: a customerId
+          type: string
+          required: false
+        billingAccountId:
+          description: a billingAccountId
+          type: string
+          required: false                     
+      responses:
+        200:
+          description: |
+            cloudServices retrieved successfully
+          body:
+            application/json:
+              example: !include examples/publicApi/cloudServices-get-example.json
+    /{cloudServiceId}:
+      displayName: getcloudServiceById
+      description: A specific cloudService (by Id)
+      get:
+        responses:
+          200:
+            description: |
+              cloudService retrieved successfully
+            body:
+              application/json:
+                schema: !include schemas/_dumb-schema.json
+                example: !include examples/publicApi/cloudService-get-example.json
+    /updateCloudService:
+      displayName: Retrieve a Cloud Service     
+      put:
+        description: Updates a Cloud Service for a given customerId and billingAccountId
+        queryParameters:
+          cloudServiceId:
+            description: a cloudServiceId
+            type: string
+            required: true                            
+        responses:
+          200:
+            description: |
+              cloudService updated successfully
+            body:
+              application/json:
+                example: !include examples/publicApi/ack-PUT-example.json     
+    /removeCloudService:
+      displayName: Remove a Cloud Service                                   
+      delete:
+        description: Removes a Cloud Service for a given customerId and billingAccountId
+        queryParameters:
+          cloudServiceId:
+            description: a cloudServiceId
+            type: string
+            required: true                            
+        responses:
+          200:
+            description: |
+              cloudService removed successfully
+            body:
+              application/json:
+                  example: !include examples/publicApi/ack-DELETE-example.json                                               
+/createWorkplace:
+    displayName: Create a Workplace in the Billing System          
     post:
-      description: adds a Cloud Service Entry to the Customer's Billing Master Plan
+      description: creates a Workplace Entry
       body:
-        application/x-www-form-urlencoded:
-          formParameters:
-            cloudCustomerId:
-              description: the SGAS customer ID
-              type: integer
-            cloudServiceName:
-              description: the service name to add to this customers billing
-              type: string
-            cloudBillingSpecifics:
-              description: the customer billing specifics for this customer (override defaults)
-              type: string              
+        application/json:
+          schema: !include schemas/_dumb-schema.json
+          example: !include examples/publicApi/Workplace-post-example.json
       responses:
         200:
           description: |
             Request Acknowledged
           body:
             application/json:
-              example: |
-                {
-                  "status": "ACK"
-                }                
+              example: !include examples/publicApi/ack-POST-example.json
+/retrieveWorkplaces:
+    displayName: Retrieve Workplaces      
+    get:
+      description: Retrieves Cloud Services for a given customerId, billingAccountId and productId    
+      queryParameters:
+        customerId:
+          description: a customerId
+          type: string
+          required: false
+        billingAccountId:
+          description: a billingAccountId
+          type: string
+          required: false
+        productId:
+          description: a productId
+          type: string
+          required: false                             
+      responses:
+        200:
+          description: |
+            Workplaces retrieved successfully
+          body:
+            application/json:
+              example: !include examples/publicApi/Workplaces-get-example.json
+    /{WorkplaceId}:
+      displayName: getWorkplaceById
+      description: A specific Workplace (by Id)
+      get:
+        responses:
+          200:
+            description: |
+              cloudService retrieved successfully
+            body:
+              application/json:
+                schema: !include schemas/_dumb-schema.json
+                example: !include examples/publicApi/Workplace-get-example.json
+    /updateWorkplace:
+      displayName: Retrieve a Workplace     
+      put:
+        description: Updates a Workplace by WorkplaceId
+        queryParameters:
+          WorkplaceId:
+            description: a WorkplaceId
+            type: string
+            required: true                            
+        responses:
+          200:
+            description: |
+              Workplace updated successfully
+            body:
+              application/json:
+                example: !include examples/publicApi/ack-PUT-example.json     
+    /removeWorkplace:
+      displayName: Remove a Workplace                                   
+      delete:
+        description: Removes a Workplace by WorkplaceId
+        queryParameters:
+          WorkplaceId:
+            description: a WorkplaceId
+            type: string
+            required: true                            
+        responses:
+          200:
+            description: |
+              Workplace removed successfully
+            body:
+              application/json:
+                example: !include examples/publicApi/ack-DELETE-example.json 
+
+# PRICING
+/retrieveOfferingPrices:
+    displayName: Retrieve Offering Prices      
+    get:
+      description: Retrieves Offering Prices for a given customerId, billingAccountId and productId    
+      queryParameters:
+        customerId:
+          description: a customerId
+          type: string
+          required: false
+        billingAccountId:
+          description: a billingAccountId
+          type: string
+          required: false
+        productId:
+          description: a productId
+          type: string
+          required: false                             
+      responses:
+        200:
+          description: |
+            OfferingPrices retrieved successfully
+          body:
+            application/json:
+              example: !include examples/publicApi/offeringPrices-get-example.json
+    /{offeringPriceId}:
+      displayName: getOfferingPriceById
+      description: A specific OfferingPrice (by Id)
+      get:
+        responses:
+          200:
+            description: |
+              OfferingPrice retrieved successfully
+            body:
+              application/json:
+                schema: !include schemas/_dumb-schema.json
+                example: !include examples/publicApi/offeringPrice-get-example.json
+
+# SPEND
+/retrieveTemplatePrices:
+    displayName: Retrieve Template Prices      
+    get:
+      description: Retrieves Template Prices for a given customerId, billingAccountId and productId    
+      queryParameters:
+        customerId:
+          description: a customerId
+          type: string
+          required: false
+        billingAccountId:
+          description: a billingAccountId
+          type: string
+          required: false
+        productId:
+          description: a productId
+          type: string
+          required: false                             
+      responses:
+        200:
+          description: |
+            TemplatePrices retrieved successfully
+          body:
+            application/json:
+              example: !include examples/publicApi/templatePrices-get-example.json
+    /{templatePriceId}:
+      displayName: getTemplatePriceById
+      description: A specific TemplatePrice (by Id)
+      get:
+        responses:
+          200:
+            description: |
+              TemplatePrice retrieved successfully
+            body:
+              application/json:
+                schema: !include schemas/_dumb-schema.json
+                example: !include examples/publicApi/templatePrice-get-example.json
+# INVOICE                                       

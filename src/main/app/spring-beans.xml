@@ -11,50 +11,36 @@
         
     <!-- Bean Definitions -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.sungardas.esb"></context:component-scan>   
+	<context:component-scan base-package="com.sungardas.esb.model"></context:component-scan>   
 
-	<bean id="customer" class="com.sungardas.ebs.Customer">
-		<property name="companyName" ref="companyName"></property>
-		<property name="companyDomain" ref="companyDomain"></property>
-		<property name="lastName" ref="lastName"></property>
-		<property name="firstName" ref="firstName"></property>
-		<property name="phoneNumber" ref="phoneNumber"></property>
-	</bean>
+	<bean id="customer" class="com.sungardas.ebs.Customer"/>
 	
-	<bean id="product" class="com.sungardas.ebs.Product">
-		<!-- add props -->
-	</bean>
+	<bean id="product" class="com.sungardas.ebs.Product"/>
 	
-	<bean id="contact" class="com.sungardas.ebs.Contact">
-		<!-- add props -->
-	</bean>
+	<bean id="customerContact" class="com.sungardas.ebs.CustomerContact"/>
 
-	<bean id="sgasContact" class="com.sungardas.ebs.SgasContact">
-		<!-- add props -->
-	</bean>
+	<bean id="sgasContact" class="com.sungardas.ebs.SgasContact"/>
 
+	<bean id="billingAccount" class="com.sungardas.ebs.BillingAccount"/>
+	
+	<bean id="order" class="com.sungardas.ebs.Order"/>
 
-	<bean id="billingAccount" class="com.sungardas.ebs.BillingAccount">
-		<!-- add props -->
-	</bean>
+	<bean id="usage" class="com.sungardas.ebs.Usage"/>>
 	
-	<bean id="order" class="com.sungardas.ebs.Order">
-		<!-- add props -->
-	</bean>
-
-	<bean id="usage" class="com.sungardas.ebs.Usage">
-		<!-- add props -->
-	</bean>
+	<bean id="address" class="com.sungardas.ebs.Address"/>
 	
-	<bean id="address" class="com.sungardas.ebs.Address">
-		<!-- add props -->
-	</bean>
-	
-	<!-- not needed now
-	<bean id="cdr" class="com.sungardas.esb.CDR" init-method="myInit" destroy-method="myCleanUp">
+	<bean id="canonical" class="com.sungardas.esb.CanonicalWrapper">
 		<property name="customer" ref="customer"></property>
+		<property name="product" ref="product"></property>
+		<property name="customerContact" ref="customerContact"></property>
+		<property name="sgasContact" ref="sgasContact"></property>
+		<property name="billingAccount" ref="billingAccount"></property>
+		<property name="order" ref="order"></property>
+		<property name="usage" ref="usage"></property>
+		<property name="address" ref="address"></property>
 	</bean>	
-	-->
+	
+	<bean id="rosetta" class="com.sungardas.ebs.Rosetta"/>
 	
 	<bean id="objectStore" class="org.mule.util.store.SimpleMemoryObjectStore"/>
 	

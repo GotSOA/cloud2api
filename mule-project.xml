@@ -3,4 +3,5 @@
     <name>cloud2api</name>
     <description></description>
     <muleExtension name="HBase" qualifier="org.mule.tooling.ui.contribution.hbase"/>
+    <muleExtension name="Mongo DB" qualifier="org.mule.tooling.ui.contribution.mongo.3.5.0"/>
 </mule-project>

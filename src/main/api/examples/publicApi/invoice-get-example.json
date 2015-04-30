@@ -1,0 +1,14 @@
+{
+	"id": 777,
+	" orderId": 1234,
+	" contractId": 5678,
+	"invoiceTypeDescription": "recurrent",
+	" issueDate": "2012-04-21T18:25:43-05:00",
+	" dueDate": "2012-05-21T18:25:43-05:00",
+	" billThroughDate": "2014-04-21T18:25:43-05:00",
+	" addressId": 12345,
+	" contactId": 67890,
+	" paymentMethodId": 111,		
+	"remittanceInfo": "Net 30 Days",
+	"currencyISOCode": "USD"
+}

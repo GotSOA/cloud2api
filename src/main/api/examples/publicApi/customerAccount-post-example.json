@@ -1,0 +1,114 @@
+{
+	"parentId": 123,
+	"companyName": "greatCompany",
+	"companyDomain": "greatco.com",
+	"address": {
+				"id": 123,
+				"address1": "123 main street",
+				"address2": "Suite 100",
+				"city": "Sausalito",
+				"county": "Marin",
+				"state": "CA",
+				"zip": "94960",
+				"country": "US",
+				"phone": "415-123-4567",
+				"phone2": "",
+				"fax": "",
+				"email": "some.email@marin.org",
+				"addressTypeDescription": "business"},
+	"contact": [
+				{
+					"id":12345,
+					"salutation": "Mr.",
+					"firstName": "Joao",
+					"lastName": "Ribeiro",
+					"middleInitial": "P",
+					"e-mail": "jpribeiro@vogue.br", 
+					"title": "big cheese", 
+					"address": "Rua Tutoia, 1157 04007-900 - Sao Paulo",
+					"contactType": "customer"
+				},
+				{
+					"id":54321,
+					"salutation": "Mr.",
+					"firstName": "Diego",
+					"lastName": "Barco",
+					"middleInitial": "M",
+					"e-mail": "diego.barco@vogue.br", 
+					"title": "another big cheese", 
+					"address": "Avenida Branda, 2200 04088-100 - Sao Paulo",
+					"contactType": "customer"
+				},
+				{
+					"id":67890, 
+					"salutation": "Ms.",
+					"firstName": "Daniela",
+					"lastName": "Aponte",
+					"middleInitial": "J",
+					"e-mail": "daponte@glamour.br", 
+					"title": "CFO", 
+					"address": "Av. Rio Branco, 188 04001-100 - Sao Paulo",
+					"contactType": "hard-to-catch"
+				}
+			],
+	"billingAccount": [
+						{
+					    	"id": 123,
+					    	"name": "sample billing account1",
+					    	"accountClass": "class1",
+					    	"yearlyRevenue": 1000000 
+						},
+						{
+					    	"id": 124,
+					    	"name": "sample billing account2",
+					    	"accountClass": "class2",
+					    	"yearlyRevenue": 2000000 
+						},
+						{
+					    	"id": 125,
+					    	"name": "sample billing account3",
+					    	"accountClass": "class3",
+					    	"yearlyRevenue": 3000000 
+						},
+					],
+	"order": [    		
+				{
+				    "id": 50001,
+				    "contractId": 12345,
+				    "orderTypeDescription": "STORAGE",
+				    "orderStatusDescription": "PAYMENT-PENDING",
+				    "orderDate": "2015-04-01T18:25:43-05:00",
+				    "fulfillmentDate": "2015-04-10T18:25:43-05:00",
+				    "orderDescription": "AUTO-SCALE",
+				    "orderLevelDiscount": "5%",
+				    "currencyISOCode": "USD",
+				    "signature": "srata"
+				},
+				{
+			    "id": 50002,
+			    "contractId": 12345,
+			    "orderTypeDescription": "STORAGE",
+			    "orderStatusDescription": "FULLFILED",
+			    "orderDate": "2015-04-01T18:25:43-05:00",
+			    "fulfillmentDate": "2015-04-10T18:25:43-05:00",
+			    "orderDescription": "AUTO-SCALE",
+			    "orderLevelDiscount": "10%",
+			    "currencyISOCode": "USD",
+			    "signature": "srata"
+				},
+				{
+			    "id": 50003,
+			    "contractId": 12345,
+			    "orderTypeDescription": "STORAGE",
+			    "orderStatusDescription": "CANCELED",
+			    "orderDate": "2015-04-01T18:25:43-05:00",
+			    "fulfillmentDate": "2015-04-10T18:25:43-05:00",
+			    "orderDescription": "AUTO-SCALE",
+			    "orderLevelDiscount": "0%",
+			    "currencyISOCode": "USD",
+			    "signature": "srata"
+				}
+			],
+	"customerType": "Whatever CustomerType ENUM"
+}
+GOOD-CUSTOMER;-) for SAKE of UPDATE

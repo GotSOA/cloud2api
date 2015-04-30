@@ -1,0 +1,17 @@
+[
+	{
+		"id": 12345,
+		"priceType": "TEMPLATE",
+		"otherProps": "no clue1"
+	},
+	{
+		"id": 12346,
+		"priceType": "TEMPLATE",
+		"otherProps": "no clue2"
+	},
+	{
+		"id": 12347,
+		"priceType": "TEMPLATE",
+		"otherProps": "no clue3"
+	}
+]

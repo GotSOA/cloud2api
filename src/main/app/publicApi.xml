@@ -45,13 +45,19 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
     </apikit:mapping-exception-strategy>
     <data-mapper:config name="addCloudService_to_Customer" transformationGraphPath="addcloudservice-to-customer.grf" doc:name="addCloudService_to_Customer"/>
     <flow name="main" doc:name="main">
-        <http:inbound-endpoint address="http://localhost:${http.port}/api" doc:name="HTTP"/>
+        <http:inbound-endpoint address="http://0.0.0.0:${http.port}/api" doc:name="HTTP"/>
         <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
         <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
     </flow>
-    <!--  retrieveCustomer -->    
+    
+    <!--  createCustomerAccount POST -->    
+    <flow name="post:/createCustomerAccount:apiConfig" doc:name="post:/createCustomerAccount:apiConfig">
+    	<logger message="In createCustomerAccount (POST) ..." level="INFO" doc:name="Logger"/>
+    </flow>
+    
+    <!--  retrieveCustomer by email and company name -->    
     <flow name="get:/retrieveCustomer:apiConfig" doc:name="get:/retrieveCustomer:apiConfig">
-    	<logger message="In retrieveCustomer (GET) ..." level="INFO" doc:name="Logger"/>
+    	<logger message="In retrieveCustomer by email and companyName (GET) ..." level="INFO" doc:name="Logger"/>
         <json:object-to-json-transformer doc:name="Object to JSON"/>
         <!-- convert inbound props into flowVars or invocation properties -->
         <set-variable variableName="email" value="#[message.inboundProperties['http.query.params']['email']]" doc:name="set Variable email"/>
@@ -61,6 +67,28 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
         <vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
         <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
     </flow>
+    
+    <!--  retrieveCustomer by id -->    
+    <flow name="get:/retrieveCustomer/{customerId}:apiConfig" doc:name="get:/retrieveCustomer/{customerId}:apiConfig">
+    	<logger message="In retrieveCustomer by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!--  retrieveAccountContacts -->
+    <flow name="get:/retrieveAccountContacts:apiConfig" doc:name="get:/retrieveAccountContacts:apiConfig">
+    	<logger message="In retrieveAccountContacts (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!--  retrieveAccountContact by id -->
+    <flow name="get:/retrieveAccountContacts/{contactId}:apiConfig" doc:name="get:/retrieveAccountContacts/{contactId}:apiConfig">
+    	<logger message="In retrieveAccountContact by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!--  updateAccountContact -->
+    <flow name="put:/retrieveAccountContacts/{contactId}:apiConfig" doc:name="put:/retrieveAccountContacts/{contactId}:apiConfig">
+    	<logger message="In updateAccountContact (PUT) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    
     <!-- addCloudService -->
     <flow name="post:/addCloudService:apiConfig" doc:name="post:/addCloudService:apiConfig">
     	<logger message="In addCloudService 1 (POST) ... " level="INFO" doc:name="Logger"/>
@@ -88,37 +116,88 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
        	<object-to-string-transformer doc:name="Object to String"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="Q.processRequest" doc:name="VM-processRequest"/>
         <!-- <exception-strategy ref="global-main-exception-strategy" doc:name="Reference Exception Strategy" /> -->
-    </flow>
-    <!-- addCloudService2
-    <flow name="post:/addCloudService2:apiConfig" doc:name="post:/addCloudService2:apiConfig">
-    	<logger message="In addCloudService 2 (POST) ..." level="INFO" doc:name="Logger"/>
-        <logger message="payload type: #[payload.getClass()]" level="INFO" doc:name="Logger"/>
-        <set-variable variableName="customerId" value="#[payload.cloudCustomerId]" doc:name="set Variable customerId"/>
-        <set-variable variableName="serviceId" value="#[payload.cloudServiceName]" doc:name="set Variable serviceId"/>
-        <set-variable variableName="billingSpecifics" value="#[payload.cloudBillingSpecifics]" doc:name="set Variable billingSpecifics"/>
-        <logger message="verify variables: customer-id: #[flowVars['customerId']]" level="INFO" doc:name="Logger"/> 
-        <logger message="verify variables: service-id #[flowVars['serviceId']]" level="INFO" doc:name="Logger"/>
-        <logger message="verify variables: billing-specifics: #[flowVars['billingSpecifics']]" level="INFO" doc:name="Logger"/>  
-        <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('examples/publicApi/post-ACK-example.json')]" doc:name="Set Payload"/>
-       	<object-to-string-transformer doc:name="Object to String"/>
-		<vm:outbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />
-    </flow>
-    -->
-    
-    <!--
-    <flow name="publicApiFlow1" doc:name="publicApiFlow1">
-         <vm:inbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.aria" />
-        <enricher doc:name="Message Enricher" target="myFooVar">
-            <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" method="POST" doc:name="HTTP"/>
-        </enricher>
-        <data-mapper:transform doc:name="DataMapper"/>
-        <logger level="INFO" doc:name="Logger"/>
-        <hbase:add-column-family config-ref="" columnFamilyName="" tableName="" doc:name="HBase"/>
-        <mongo:add-user config-ref="" newPassword="" newUsername="" doc:name="Mongo DB"/>
-        <json:object-to-json-transformer doc:name="Object to JSON"/>
     </flow> 
-    -->   
+    
+    <!--  retrieveCloudServices -->
+    <flow name="get:/retrieveCloudServices:apiConfig" doc:name="get:/retrieveCloudServices:apiConfig">
+    	<logger message="In retrieveCloudServices (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
      
+    <!--  retrieveCloudService by Id -->
+    <flow name="get:/retrieveCloudServices/{cloudServiceId}:apiConfig" doc:name="get:/retrieveCloudServices/{cloudServiceId}:apiConfig">
+    	<logger message="In retrieveCloudService by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- updateCloudService -->
+    <flow name="put:/retrieveCloudServices/{cloudServiceId}:apiConfig" doc:name="put:/retrieveCloudServices/{cloudServiceId}:apiConfig">
+    	<logger message="In updateCloudService (PUT) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- removeCloudService -->
+    <flow name="delete:/retrieveCloudServices/{cloudServiceId}:apiConfig" doc:name="delete:/retrieveCloudServices/{cloudServiceId}:apiConfig">
+    	<logger message="In removeCloudService (DELETE) ..." level="INFO" doc:name="Logger"/>
+    </flow>  
+    
+    <!-- createWorkplace -->
+    <flow name="post:/createWorkplace:apiConfig" doc:name="post:/createWorkplace:apiConfig">
+    	<logger message="In createWorkplace (POST) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- retrieveWorkplaces -->
+    <flow name="get:/retrieveWorkplaces:apiConfig" doc:name="get:/retrieveWorkplaces:apiConfig">
+    	<logger message="In retrieveWorkplaces (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>  
+    
+    <!--  retrieveWorkplace by Id -->
+    <flow name="get:/retrieveWorkplaces/{workplaceId}:apiConfig" doc:name="get:/retrieveWorkplaces/{workplaceId}:apiConfig">
+    	<logger message="In retrieveWorkplace by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+       
+    <!-- updateWorkplace -->   
+    <flow name="put:/updateWorkplace/{workplaceId}:apiConfig" doc:name="put:/updateWorkplace/{workplaceId}:apiConfig">
+    	<logger message="In updateWorkplace (PUT) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- removeWorkplace -->
+    <flow name="delete:/updateWorkplace/{workplaceId}:apiConfig" doc:name="delete:/updateWorkplace/{workplaceId}:apiConfig">
+    	<logger message="In removeWorkplace (DELETE) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+     
+    <!-- retrieveOfferingPrices -->
+    <flow name="get:/retrieveOfferingPrices:apiConfig" doc:name="get:/retrieveOfferingPrices:apiConfig">
+    	<logger message="In retrieveOfferingPrices (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>  
+    
+    <!--  retrieveOfferingPrice by Id -->
+    <flow name="get:/retrieveOfferingPrices/{offeringPriceId}:apiConfig" doc:name="get:/retrieveOfferingPrices/{offeringPriceId}:apiConfig">
+    	<logger message="In retrieveOfferingPrice by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- retrieveTemplatePrices -->
+    <flow name="get:/retrieveTemplatePrices:apiConfig" doc:name="get:/retrieveTemplatePrices:apiConfig">
+    	<logger message="In retrieveTemplatePrices (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>  
+    
+    <!--  retrieveTemplatePrice by Id -->
+    <flow name="get:/retrieveTemplatePrices/{templatePriceId}:apiConfig" doc:name="get:/retrieveTemplatePrices/{templatePriceId}:apiConfig">
+    	<logger message="In retrieveTemplatePrice by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- retrieveInvoices -->
+    <flow name="get:/retrieveInvoices:apiConfig" doc:name="get:/retrieveInvoices:apiConfig">
+    	<logger message="In retrieveInvoices (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>  
+    
+    <!--  retrieveInvoice by Id -->
+    <flow name="get:/retrieveInvoices/{invoiceId}:apiConfig" doc:name="get:/retrieveInvoices/{invoiceId}:apiConfig">
+    	<logger message="In retrieveInvoice by Id (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow> 
+    
+    <!-- retrieveInvoiceDetails --> 
+    <flow name="get:/retrieveInvoiceDetails:apiConfig" doc:name="get:/retrieveInvoiceDetails:apiConfig">
+    	<logger message="In retrieveInvoiceDetails (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>
+    
     <!-- bogus request processing flow -->
     <flow name="request-processing-flow" doc:name="request-processing-flow">
         <vm:inbound-endpoint exchange-pattern="request-response" doc:name="VM-processRequest" path="Q.processRequest" />

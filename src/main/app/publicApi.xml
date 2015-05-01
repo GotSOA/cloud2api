@@ -55,6 +55,11 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
     	<logger message="In createCustomerAccount (POST) ..." level="INFO" doc:name="Logger"/>
     </flow>
     
+    <!-- retrieveCustomerAccounts -->
+    <flow name="get:/retrieveCustomerAccounts:apiConfig" doc:name="get:/retrieveCustomerAccounts:apiConfig">
+    	<logger message="In retrieveCustomerAccounts (GET) ..." level="INFO" doc:name="Logger"/>
+    </flow>
+    
     <!--  retrieveCustomer by email and company name -->    
     <flow name="get:/retrieveCustomer:apiConfig" doc:name="get:/retrieveCustomer:apiConfig">
     	<logger message="In retrieveCustomer by email and companyName (GET) ..." level="INFO" doc:name="Logger"/>
